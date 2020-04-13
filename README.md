@@ -1,7 +1,7 @@
 # This is the mutation-genome-separator!
 
 ## Requirements
-this is a node script and needs `npm` installed to run
+this is a node script and needs `npm` installed to run (see https://nodejs.org/en/download/)
 
 ## Setup
 1. clone this repository
