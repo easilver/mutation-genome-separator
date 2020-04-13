@@ -20,7 +20,7 @@ if (!dirname) {
 const readFiles = async(mutationStream: fs.WriteStream, genomeStream: fs.WriteStream): Promise<void> => {
   await fs.readdir(dirname, async (err, filenames) => {
     if (err) {
-      console.log('there was an error reading file names')
+      console.log('there was an error reading file names from ', dirname)
       throw err
     }
     const files = filenames.filter((name) => name.match('.*?\.txt'))
@@ -40,10 +40,10 @@ const removeEmptyLines = (lines: string[]): string[] => (
 const separate = async (filename: string, mutationStream: fs.WriteStream, genomeStream: fs.WriteStream): Promise<void> => {
   await fs.readFile(dirname + '/' + filename, async (err, content) => {
     if (err) {
-      console.log('there was an error reading file ', dirname + filename)
+      console.log('there was an error reading file ', dirname + '/' + filename)
       throw err
     }
-    // we assume that the keys "Mutations" and "Genomes" will always exist in that order and never be misspelled or given with any other capitalization
+    // we assume that the keys "Mutations:" and "Genomes:" will always exist in the txt files, in that order and never be misspelled or given with any other capitalization or punctuation
     const stringContent = String(content)
     const splitContent = stringContent.split('Mutations:\n')
     const mutationsAndGenomes = splitContent[1].split('Genomes:\n')
@@ -53,19 +53,19 @@ const separate = async (filename: string, mutationStream: fs.WriteStream, genome
       mutations: removeEmptyLines(mutationsRaw.split('\n')),
       genomes: removeEmptyLines(genomesRaw.split('\n'))
     }
-    console.log('writing mutations')
+    console.log(`writing mutation data from ${dirname}/${filename} to ${outputDirName}/Mutations.txt`)
     await mutationStream.write(parts.mutations.join('\n') + '\n', (err) => {
       if (err) {
         throw err
       }
-      console.log('mutations updated')
+      console.log(`Mutations.txt updated with data from ${dirname}/${filename}`)
     })
-    console.log('writing genomes')
+    console.log(`writing genome data from ${dirname}/${filename} to ${outputDirName}/Genomes.txt`)
     await genomeStream.write(parts.genomes.join('\n') + '\n', (err) => {
       if (err) {
         throw err
       }
-      console.log('genomes updated')
+      console.log(`Genomes.txt updated with data from ${dirname}/${filename}`)
     })
   })
 }

@@ -39,5 +39,5 @@ p1:4 A 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 42 43 29 16 17 20 22 44
 
 * These files MUST have the lines with "Mutations:" and "Genomes:" heading the respective sections
 * After the script runs you will have two files in the output directory, called Mutations.txt and Genomes.txt
-* If you run this command twice with the same output file the Mutations.txt and Genomes.txt files will be replaced with the second output
+* If you run this command twice with the same output file the Mutations.txt and Genomes.txt files will be appended with the second output (so output will be twice as long)
 * This script is asynchronous so the order of the output cannot be guaranteed to be the same every time
