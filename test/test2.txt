@@ -1,0 +1,13 @@
+#OUT: 21 SS p1 72 HLAKIR_slimulate_numberplaceholder.txt
+Mutations:
+A
+B
+C
+D
+E
+Genomes:
+p1
+p2
+p3
+p4
+p17
